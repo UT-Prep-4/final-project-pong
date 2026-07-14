@@ -126,6 +126,8 @@ pen.hideturtle()
 pen.goto(0, 260)
 pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
 
+
+
 # --- Movement Functions ---
 def paddle_a_up():
     y = paddle_a.ycor()
@@ -165,8 +167,35 @@ win.onkeypress(paddle_a_left, "a")
 win.onkeypress(paddle_b_right, "l")
 win.onkeypress(paddle_b_left, "j")
 
+def restart_game():
+    global score_a, score_b
+    
+    score_a = 0
+    score_b = 0
+    
+    ball.goto(0, 0)
+    ball.dx = 1.0
+    ball.dy = 1.0
+    
+    paddle_a.goto(-350, 0)
+    paddle_b.goto(350, 0)
+    
+    pen.clear()
+    pen.goto(0, 260)
+    pen.write("Player A: 0  Player B: 0",
+              align="center",
+              font=("Courier", 24, "normal"))
+
+    game_loop()
+
+win.onkeypress(restart_game, "r")
+
+
+
 # --- Main Game Loop ---
-while True:
+def game_loop():
+    global score_a, score_b
+
     win.update()
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
@@ -216,14 +245,30 @@ while True:
         pen.goto(0,0)
         pen.write("Player B Wins!",
                 align = "center",
-                font=("Courier", 30, "normal"))
+                font=("Courier", 30, "normal")
+        )
+
+        pen.goto(0,-50)
+        pen.write(
+            "Press r to restart",
+            align="center",
+            font=("courier", 30, "normal")
+        )
         break
 
     if score_a >= 10:
         pen.goto(0, 0)
         pen.write("Player A Wins!",
               align="center",
-              font=("Courier", 30, "normal"))
+              font=("Courier", 30, "normal")
+        )
+
+        pen.goto(0,-50)
+        pen.write(
+            "Press r to restart",
+            align="center",
+            font=("courier", 30, "normal")
+        )
         break
         
 
