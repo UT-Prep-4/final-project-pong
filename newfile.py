@@ -13,6 +13,7 @@ win.tracer(0)
 # --- Score Tracking ---
 score_a = 0
 score_b = 0
+game_over = False
 
 
 
@@ -106,12 +107,22 @@ def paddle_b_left():
 def restart_game():
     global score_a 
     global score_b
+    global game_over
     paddle_a.goto (-350,0)
     paddle_b.goto (350,0)
     ball.goto(0,0)
+    ball.showturtle()
     
     score_a = 0
     score_b = 0
+    game_over = False
+
+    pen.clear()
+    pen.goto(0, 260)
+    pen.write(
+        "Player A: 0  Player B: 0",
+        align="center",
+        font=("Courier", 24, "normal")
 
 # --- Keyboard Bindings ---
 win.listen()
@@ -177,17 +188,21 @@ while True:
 
     if score_b >= 10:
         pen.goto(0,0)
+        game_over = True
+        ball.hideturtle()
         pen.write("Player B Wins!",
                 align = "center",
                 font=("Courier", 30, "normal"))
-        break
+        
 
     if score_a >= 10:
         pen.goto(0, 0)
+        game_over = True
+        ball.hideturtle()        
         pen.write("Player A Wins!",
               align="center",
               font=("Courier", 30, "normal"))
-        break
+        
         
 
 
