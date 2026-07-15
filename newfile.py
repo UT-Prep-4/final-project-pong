@@ -122,7 +122,7 @@ def restart_game():
     pen.write(
         "Player A: 0  Player B: 0",
         align="center",
-        font=("Courier", 24, "normal")
+        font=("Courier", 24, "normal"))
 
 # --- Keyboard Bindings ---
 win.listen()
